@@ -1,0 +1,296 @@
+@font-face {
+    font-family: 'robotoblack';
+    src: url('/gumacall/assets/fonts/Robot/roboto-black-webfont.eot');
+    src: url('/gumacall/assets/fonts/Robot/roboto-black-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/gumacall/assets/fonts/Robot/roboto-black-webfont.woff2') format('woff2'),
+    url('/gumacall/assets/fonts/Robot/roboto-black-webfont.woff') format('woff'),
+    url('/gumacall/assets/fonts/Robot/roboto-black-webfont.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/Robot/roboto-black-webfont.svg#robotoblack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotobold';
+    src: url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.eot');
+    src: url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.woff2') format('woff2'),
+    url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.woff') format('woff'),
+    url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/Robot/roboto-bold-webfont.svg#robotobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotomedium';
+    src: url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.eot');
+    src: url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.woff2') format('woff2'),
+    url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.woff') format('woff'),
+    url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/Robot/roboto-medium-webfont.svg#robotomedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotocondensed';
+    src:url('/gumacall/assets/fonts/roboto/RobotoCondensed-Bold.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/roboto/RobotoCondensed-BoldItalic.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/roboto/RobotoCondensed-Italic.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/roboto/RobotoCondensed-Light.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/roboto/RobotoCondensed-LightItalic.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/roboto/RobotoCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'robotoregular';
+    src: url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.eot');
+    src: url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.woff2') format('woff2'),
+    url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.woff') format('woff'),
+    url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.ttf') format('truetype'),
+    url('/gumacall/assets/fonts/Robot/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.menu-center {
+	width: 70%;
+	margin: 0 auto;
+}
+
+#_footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:25px;
+   width:100%;
+   margin-bottom: 0px;
+   font-size: 11px;
+}
+
+.img-responsive {
+	padding: 10px 10px;
+    width: 100%;
+    height: auto;
+    border: solid 2px #e0e0e0;
+    border-radius: 50%;
+}
+.info-cliente-container {
+	display:table-cell;
+	vertical-align:middle; 
+	width: 100%; 
+	height: 200px;
+}
+
+#_fecha1 {
+  height: 44px;
+    width: 100%;
+    padding: 0 10px;
+    border: 1px solid #9da3a6;
+    margin: 0;
+    text-overflow: ellipsis;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+    box-sizing: border-box;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -khtml-border-radius: 4px;
+    border-radius: 4px;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+    box-shadow: none;
+    color: #000;
+    font-size: 1em;
+    font-weight: 400;
+    direction: ltr;
+}
+
+.container-input {
+  position: relative;
+  /*padding-right: 35px !important;*/
+  width: 100%;
+}
+
+.container-input > input {  
+  border: 1px solid #9da3a6;
+  border-radius: 5px;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;  
+  text-align: center;
+}
+
+.container-input i {
+  position: absolute;
+  margin: 12px 15px;
+  right: 0;
+  padding-right: 5px !important;
+  color: #4a525a;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+/*aca empieza*/
+.container-button {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+}
+
+.container-button > .form-control {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+  text-align: center;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 20%!important;
+}
+.container-button .form-control:not(:first-child), .input-group-addon:not(:first-child), .input-group-btn:not(:first-child)>.button1, .input-group-btn:not(:first-child)>.btn-group>.button1, .input-group-btn:not(:first-child)>.dropdown-toggle, .input-group-btn:not(:last-child)>.btn-group:not(:first-child)>.button1, .input-group-btn:not(:last-child)>.button1:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.container-button .form-control:not(:last-child), .input-group-addon:not(:last-child), .input-group-btn:not(:first-child)>.btn-group:not(:last-child)>.button1, .input-group-btn:not(:first-child)>.button1:not(:last-child):not(.dropdown-toggle), .input-group-btn:not(:last-child)>.button1, .input-group-btn:not(:last-child)>.btn-group>.button1, .input-group-btn:not(:last-child)>.dropdown-toggle {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.button1 {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  height: 3.1rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-secondary {
+  color: #292b2c;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.input-group-btn:not(:first-child)>.button1, .input-group-btn:not(:first-child)>.btn-group {
+  z-index: 2;
+  margin-left: -1px;
+}
+
+/****** Tabla zebra ********/
+.tblGeneral tr:nth-child(even) {
+    font-family:'robotoregular';
+    background-color: #ffffff;
+    text-align: center; 
+}
+.tblGeneral tr:nth-child(odd) {
+    font-family:'robotoregular';
+    background-color: #e7e2f7;
+    text-align: center;
+}
+
+.tblGeneral th {
+    background: #13479a;
+    color: #fff;
+    font-size: 14px;
+    font-family:'robotobold';
+    text-align: center;
+}
+
+.title-modals {
+  font-family:'robotobold';
+  font-size: 22px;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.dataTables_length {
+  display: none;
+}
+
+#tblTalonarios .dataTables_wrapper .dataTables_filter label {
+ display: none;
+}
+
+.loader-1, .load-1 {
+  position: absolute;
+  width: 100px;
+  color: white;
+  line-height: 100px;
+  text-align: center;
+}
+
+.loader-1 {
+  z-index: 1000;
+  background-color: white;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+.load-1 {
+  background: black;
+  position: fixed;
+  z-index: 999;  
+  top: -25%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: #000;  
+  will-change: opacity;
+  opacity: 0.5;
+}
