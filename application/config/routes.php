@@ -5,16 +5,20 @@ $route['default_controller'] = 'login_controller';
 $route['404_override'] = 'login_controller';
 $route['translate_uri_dashes'] = FALSE;
 
-//MIS RUTAS
-
 //RUTA: LOGIN
 $route['acreditando'] = 'login_controller/validandoCuenta';
+
+//RUTA: USUARIOS
+$route['actualizarUsuario'] = 'usuarios_controller/actualizarUsuario';
 
 //RUTA: MAIN
 $route['main'] = 'main_controller';
 
 //RUTA: MOVIMIENTOS
 $route['movimientos'] = 'movimientos_controller';
+$route['listarMovimientos'] = 'movimientos_controller/listandoMovimientos';
+$route['crear'] = 'movimientos_controller/crearMovimiento';
+$route['agregarArtDatatable'] = 'movimientos_controller/listarArticulos';
 
 //RUTA: TALONARIOS
 $route['talonarios'] = 'talonarios_controller';

@@ -19,5 +19,22 @@ class movimientos_controller extends CI_Controller {
         $this->load->view('footer/footer');
         $this->load->view('jsView/js_movimientos');   
     }
+
+    public function crearMovimiento() {
+        $data['menu_usuario']=$this->main_model->generarMenu($this->session->userdata('rol'));
+        
+        $this->load->view('header/header',$data);
+        $this->load->view('pages/movimientos/nuevoMovimiento');
+        $this->load->view('footer/footer');
+        $this->load->view('jsView/js_movimientos');
+    }
+
+    public function listarArticulos() {
+        $this->movimientos_model->listarArticulos1();
+    }
+
+    public function listandoMovimientos() {
+        $this->movimientos_model->listandoMovimientos();
+    }
 }
 ?>

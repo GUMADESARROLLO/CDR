@@ -1,23 +1,23 @@
 <div class="container"><br><br>
     <div class="row">
         <div class="col s12 m12">
-            <a href="#modalNuevMov" class="waves-effect waves-light modal-trigger right"><i class="small material-icons">add_circle</i></a>
+            <a href="<?php echo base_url();?>index.php/crear" class="waves-effect waves-light modal-trigger right"><i class="small material-icons">add_circle</i></a>
         </div>
     </div>
 	<div class="row">
 		<div class="col s12 m3 container-input">
 			<i class="material-icons">today</i>
-			<input type="text" name="desde1" placeholder="Desde" value="">
+			<input type="text" class="input-fecha" name="desde1" placeholder="Desde" value="">
 		</div>
 		<div class="col s12 m3 container-input">
 			<i class="material-icons">today</i>
-			<input type="text" name="hasta2" placeholder="Hasta">
+			<input type="text" class="input-fecha" name="hasta2" placeholder="Hasta">
 		</div>
 		<div class="col s12 m5 container-button">
 			<div class="container-button">
 				<input type="text" class="form-control" placeholder="Buscar en movimientos" >
 				<span class="input-group-btn">
-					<button class="button1 btn-secondary" type="button"><i class="material-icons">search</i></button>
+					<button class="button1 btn-secondary waves-effect" type="button"><i class="material-icons">search</i></button>
 				</span>
 			</div>
 		</div>
@@ -35,62 +35,13 @@
             <table id="tblMovimientos" class="display" cellspacing="0" width="100%">
                 <thead>
 	                <tr>
-	                    <th>CÓDIGO</th>
-	                    <th>CONCEPTO</th>
-	                    <th>FECHA</th>
-	                    <th>USUARIO</th>
+                        <th>ID</th>
+                        <th>CÓDIGO</th>
+                        <th>CONCEPTO</th>
+                        <th>FECHA</th>
+                        <th>USUARIO</th>
 	                </tr>
                 </thead>
-                <tbody>
-                	<tr>
-                		<td>00001</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00002</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-					<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                	<tr>
-                		<td>00004</td>
-                		<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                		<td>29/01/2018</td>
-                		<td>Bismarck Escobar</td>
-                	</tr>
-                </tbody>
             </table>
 		</div>
 	</div>

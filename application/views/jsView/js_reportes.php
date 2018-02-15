@@ -3,6 +3,7 @@ $(document).ready(function() {
 	$('.modal').modal();
 	inicializarDatatable("1");
 	inicializaControlFecha();
+	inicializaControlChosen();
 });
 
 var val = document.myForm.group1;
@@ -11,22 +12,29 @@ for(var i = 0; i < val.length; i++) {
     val[i].onclick = function() {
     	var table = $('#tblReportes').DataTable();
     	table.destroy();
-    	$('#tblReportes').empty(); 
     	inicializarDatatable(this.value);
 		
 		$.getJSON('TipoRpt/' + this.value, function (data) {
 			$("#menu-reporte").empty();
-			$("#menu-reporte").append(data[0]['menu']);			
+			$("#menu-reporte").append(data[0]['menu']);		
 			inicializaControlFecha();
+			inicializaControlChosen();
 		});
     };
 }
 
+
+
 function inicializarDatatable(opc) {
+	$('#data-reporte').show();
 	switch (opc) {
 		//CONFIGURANDO DATATABLE PARA REPORTE MOVIMIENTO
 		case "1":
-			$('#tblReportes').dataTable({
+			$("#content-recibos").remove();
+			$('#tblReportes')
+				.empty()
+				.show()
+				.dataTable({
 		        "ordering": true,
 		        "info": false,
 		        "bPaginate": true,
@@ -62,7 +70,11 @@ function inicializarDatatable(opc) {
 		break;
 		//CONFIGURANDO DATATABLE PARA REPORTE TALONARIO
 		case "2":
-			$('#tblReportes').dataTable({
+			$("#content-recibos").remove();
+			$('#tblReportes')
+				.empty()
+				.show()
+				.dataTable({
 		        "ordering": true,
 		        "info": false,
 		        "bPaginate": true,
@@ -98,7 +110,11 @@ function inicializarDatatable(opc) {
 		break;
 		//CONFIGURANDO DATATABLE PARA REPORTE DE AUDITORIA
 		case "3":
-			$('#tblReportes').dataTable({
+			$("#content-recibos").remove();
+			$('#tblReportes')
+				.empty()
+				.show()
+				.dataTable({
 		        "ordering": true,
 		        "info": false,
 		        "bPaginate": true,
@@ -132,7 +148,38 @@ function inicializarDatatable(opc) {
 		            "search":     "BUSCAR"
 		        },
 			});
-
+		break;
+		case "4":
+			$('#data-reporte').hide();
+			$("#data-reporte-tmp")
+				.empty()
+				.append(`<div id="content-recibos" class="col s12 m12">
+							<div class="card">
+								<div class="card-content">
+									<p class="title-modals">Recibos pendientes a utilizar</p>
+									<div class="divider"></div><br>
+									<div id="list-consecutivos">
+										<p>Aqui apareceran los consecutivos pendientes a utilizar</p>
+									</div>
+								</div>
+							</div>
+						</div>`);
+		break;
+		case "5":
+			$('#data-reporte').hide();
+			$("#data-reporte-tmp")
+				.empty()
+				.append(`<div id="content-recibos" class="col s12 m12">
+							<div class="card">
+								<div class="card-content">
+									<p class="title-modals">Recibos pendientes a utilizar</p>
+									<div class="divider"></div><br>
+									<div id="list-consecutivos">
+										<p>Aqui apareceran los consecutivos pendientes a utilizar</p>
+									</div>
+								</div>
+							</div>
+						</div>`);
 		break;
 	}
 }
@@ -261,8 +308,40 @@ function generandoDataRpt(opc) {
 	        "fnInitComplete": function () {
 	        	loadingPage(false);
 	        }
-	    });
-        
+	    });        
+	break;
+	case "4":
+		loadingPage(true);
+		$("#list-consecutivos").empty();
+	    $.ajax({
+	        url: 'reporteData/' + opc,
+	        type: "post",
+	        async: true,
+	        success: function(data) {
+	        	var html1=""; var html2=""; var cont=0;
+	        	var cant = Object.keys(JSON.parse(data)).length;
+
+	        	$.each(JSON.parse(data), function(i, item) {
+					html2+='<div class="col s12 m1">' +
+								'<div class="chip">' +
+									item +
+								'</div>' +
+							'</div>';							
+					if ( cont==11 ) {
+						html1='<div class="row">' + html2 + '</div>';
+						$("#list-consecutivos").append(html1);
+						cont=0; html2='';
+	                }else {	                	
+	                	if (cant<i) {
+	                		html1='<div class="row">' + html2 + '</div>';
+							$("#list-consecutivos").append(html1);
+	                	}
+	                	cont=cont+1;
+	                }
+				});
+				loadingPage(false);
+	        }
+	    });		
 	break;
 }
 }

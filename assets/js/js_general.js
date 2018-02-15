@@ -8,14 +8,7 @@ $(document).ready(function() {
 	}); 
 });
 
-function inicializaControlFecha() {
-    var config = {
-        '.chosen-select': {}
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
-    
+function inicializaControlFecha() {    
     $('input[class="input-fecha"]').daterangepicker({
      "locale": {
             "format": "MM/DD/YYYY",
@@ -53,6 +46,15 @@ function inicializaControlFecha() {
         singleDatePicker: true,
         showDropdowns: true
     });
+}
+
+function inicializaControlChosen() {
+    var config = {
+        '.chosen-select': {}
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
 }
 
 function loadingPage(par) {

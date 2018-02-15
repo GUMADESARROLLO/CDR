@@ -12,10 +12,10 @@ class main_model extends CI_Model {
             case '0':
                 //menu: Administrador
                 $menu='
-                    <li><a href="'.base_url("index.php/main").'">Resumen</a></li>
-                    <li><a href="'.base_url("index.php/movimientos").'">Movimientos</a></li>
-                    <li><a href="'.base_url("index.php/talonarios").'">Talonarios</a></li>
-                    <li><a href="'.base_url("index.php/reportes").'">Reportes</a></li>';
+                    <li><a id="resumen" href="'.base_url("index.php/main").'">Resumen</a></li>
+                    <li><a id="movimientos" href="'.base_url("index.php/movimientos").'">Movimientos</a></li>
+                    <li><a id="talonarios" href="'.base_url("index.php/talonarios").'">Talonarios</a></li>
+                    <li><a id="reportes" href="'.base_url("index.php/reportes").'">Reportes</a></li>';
             break;
         }
         return $menu;

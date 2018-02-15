@@ -1,10 +1,32 @@
 <script>
 $(document).ready(function() {
+    inicializaControlFecha();
+    var pathname = window.location.pathname;
+    if (pathname.match(/crear.*/)) {
+		$(".nav-wrapper ul li a").each(function() {
+			if($(this).attr("id") == "movimientos") {
+				$(this).parent().addClass("active");
+				$(this).append(' [Nuevo]')
+			}
+		});
+    };
+
 	$('.modal').modal();
+	
 	$("#tblMovimientos").DataTable({
-        "ordering": true,
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "listarMovimientos",
+            "dataType": "json",
+            "type": "POST"
+        }
+	});
+
+	$("#tblDetalleArt").DataTable({
+        "ordering": false,
         "info": false,
-        "bPaginate": true,
+        "bPaginate": false,
         "bfilter": false,
        	"lengthMenu": [[10,20,30,-1], [10,20,30,"Todo"]],
         "searching": false,
@@ -17,7 +39,7 @@ $(document).ready(function() {
             [20, 30, "Todo"]
         ],
         "language": {
-            "zeroRecords": "NO HAY RESULTADOS",
+            "zeroRecords": "NO HAY ARTUCULOS SELECCIONADOS",
             "paginate": {
                 "first":      "Primera",
                 "last":       "Última ",
@@ -29,44 +51,6 @@ $(document).ready(function() {
             "search":     "BUSCAR"
         }
 	});
-
-	$('input[name="desde1"],[name="hasta2"]').daterangepicker({
-	 "locale": {
-	        "format": "MM/DD/YYYY",
-	        "separator": " - ",
-	        "applyLabel": "Apply",
-	        "cancelLabel": "Cancel",
-	        "fromLabel": "From",
-	        "toLabel": "To",
-	        "customRangeLabel": "Custom",
-	        "daysOfWeek": [
-	            "D",
-	            "L",
-	            "M",
-	            "M",
-	            "M",
-	            "V",
-	            "S"
-	        ],
-	        "monthNames": [
-	            "Enero",
-	            "Febrero",
-	            "Marzo",
-	            "Abril",
-	            "Mayo",
-	            "Junio",
-	            "Julio",
-	            "Agosto",
-	            "Septiembre",
-	            "Octubre",
-	            "Noviembre",
-	            "Diciembre"
-	        ],	        
-	        "firstDay": 0
-	    },
-        singleDatePicker: true,
-        showDropdowns: true
-	});
 });
 
 $('#select1').on('change', function() {
@@ -75,4 +59,62 @@ $('#select1').on('change', function() {
     
     table.page.len( cantRows ).draw();
 })
+
+var cantRows=0;
+$("#agArticulo").on('click', function() {
+    cantRows = cantRows + 1;
+    console.log(cantRows)
+    var table = $('#tblDetalleArt').DataTable();
+    $.ajax({
+        url: "agregarArtDatatable",
+        type: "POST",
+        async: true,
+        success: function(data) {
+            var select = '<select name="selectRpt" id="select-'+cantRows+'" style="height:20px" id="selectRpt" class="select';
+                select +=' chosen-select browser-default"><option value="">Seleccionar todo</option>';
+            
+            if (data!=0) {
+                $.each(JSON.parse(data), function(i, item) {
+                    select += '<option value="' + item['value'] + '">' + item['desc'] + '</option>';
+                });
+            }
+            table.row.add( [
+                "<center><input readonly type='text' id='1' value='' style='height:32px; width:80%; text-align:center;' /><center>",
+                select + '</select>',
+                "<center><input type='text' value='' style='height:32px; width:80%; text-align:center;' /></center>",
+                '<center><a class="btn-cancel" href="#"><i class="material-icons quitar">close</i></a></center>'
+            ]).draw(false);
+            inicializaControlChosen();
+        }
+    });
+});
+
+$('#tblDetalleArt tbody').on( 'click', 'i.quitar', function () {
+    cantRows = cantRows -1;
+    var tabla = $('#tblDetalleArt').DataTable();
+    tabla
+    .row( $(this).parents('tr'))
+    .remove()
+    .draw();
+} );
+
+$(document).on('change', '.select', function(){
+    $(this).val();
+})
+
+function guardarMovimiento() {
+    var tabla = $('#tblDetalleArt').DataTable();
+    tabla.rows().eq(0).each(function(index) {
+        var row = tabla.row(index);
+        var data = row.data();
+        var v1 = data[1];
+        alert(v1);
+
+        /*if ($('#chkUser'+data[0]).is(':checked')) { 
+            agentesSeleccionados[pos] = ID_Campannas + "," + data[0];
+            pos++;
+        }*/
+    });
+}
+
 </script>

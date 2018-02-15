@@ -7,23 +7,23 @@
                     <div class="divider"></div><br>
                     <form action="#" name="myForm">
                         <p>
-                            <input name="group1" type="radio" checked="checked" id="test1" value="1" />
+                            <input name="group1" type="radio" class="with-gap" checked="checked" id="test1" value="1" />
                             <label for="test1">Movimientos</label>
                         </p>
                         <p>
-                            <input name="group1" type="radio" id="test2" value="2" />
+                            <input name="group1" type="radio" class="with-gap" id="test2" value="2" />
                             <label for="test2">Talonarios</label>
                         </p>
                         <p>
-                            <input name="group1" type="radio" id="test3" value="3" />
+                            <input name="group1" type="radio" class="with-gap" id="test3" value="3" />
                             <label for="test3">Auditoria</label>
                         </p>
                         <p>
-                            <input name="group1" type="radio" id="test4" value="4" />
+                            <input name="group1" type="radio" class="with-gap" id="test4" value="4" />
                             <label for="test4">Consecutivos</label>
                         </p>
                         <p>
-                            <input name="group1" type="radio" id="test5" value="5" />
+                            <input name="group1" type="radio" class="with-gap" id="test5" value="5" />
                             <label for="test5">General</label>
                         </p>
                     </form>
@@ -48,7 +48,7 @@
                             <i class="material-icons">today</i>
                             <input type="text" name="hasta2" class="input-fecha" placeholder="Hasta">
                         </div>
-                        <div class="col s12 m2">
+                        <div class="col s12 m2 center" >
                             <a href="#!" id="generaRpt" onclick="generandoDataRpt('1')" class=""><i class="small material-icons">play_circle_filled</i></a>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
 	</div>
 	<div class="divider"></div>
 	<br>
-    <div class="row">
+	<div class="row" id="data-reporte">
         <div class="col s12 m12">
             <div class="container-button">
                 <input type="text" class="form-control" placeholder="Buscar en Reporte" >
@@ -67,10 +67,9 @@
                 </span>
             </div>
         </div>
-    </div>
-	<div class="row" id="data-reporte">
 		<div class="col s12 m12">
              <table id="tblReportes" class="display" cellspacing="0" width="100%"></table>
 		</div>
 	</div>
+    <div class="row" id="data-reporte-tmp"></div>
 </div>

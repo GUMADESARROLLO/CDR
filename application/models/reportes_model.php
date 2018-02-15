@@ -19,7 +19,7 @@ class reportes_model extends CI_Model {
                         <i class="material-icons">today</i>
                         <input type="text" class="input-fecha" name="hasta2" placeholder="Hasta">
                     </div>
-                    <div class="col s12 m2">
+                    <div class="col s12 m2 center">
                         <a href="#!" id="generaRpt" onclick="generandoDataRpt('."'".$val."'".')"><i class="small material-icons">play_circle_filled</i></a>
                     </div>';
             break;
@@ -33,7 +33,7 @@ class reportes_model extends CI_Model {
                         <i class="material-icons">today</i>
                         <input type="text" class="input-fecha" name="hasta2" placeholder="Hasta">
                     </div>
-                    <div class="col s12 m2">
+                    <div class="col s12 m2 center">
                         <a href="#!" onclick="generandoDataRpt('."'".$val."'".')"><i class="small material-icons">play_circle_filled</i></a>
                     </div><br><br><br>
                     <div class="col s12 m12">
@@ -58,7 +58,38 @@ class reportes_model extends CI_Model {
                         <i class="material-icons">today</i>
                         <input type="text" class="input-fecha" name="hasta2" placeholder="Hasta">
                     </div>
-                    <div class="col s12 m2">
+                    <div class="col s12 m2 center">
+                        <a href="#!" id="generaRpt" onclick="generandoDataRpt('."'".$val."'".')"><i class="small material-icons">play_circle_filled</i></a>
+                    </div>';
+            break;
+            case '4':
+                $data1[0]['menu']='<br>
+                    <div class="col s12 m10">
+                        <select name="" id="" class="chosen-select browser-default">
+                            <option value="" disabled selected><span>Talonario</span></option>
+                            <option value="1">ETL-00001</option>
+                            <option value="2">ETL-00002</option>
+                            <option value="3">ETL-00003</option>
+                            <option value="3">ETL-00003</option>
+                            <option value="3">ETL-00003</option>
+                            <option value="3">ETL-00003</option>
+                        </select>
+                    </div>
+                    <div class="col s12 m2 center">
+                        <a href="#!" id="generaRpt" onclick="generandoDataRpt('."'".$val."'".')"><i class="small material-icons">play_circle_filled</i></a>
+                    </div>';
+            break;
+            case '5':
+                $data1[0]['menu']='<br>             
+                    <div class="col s12 m5 container-input">
+                        <i class="material-icons">today</i>
+                        <input type="text" class="input-fecha" name="desde1" placeholder="Desde" value="">
+                    </div>
+                    <div class="col s12 m5 container-input">
+                        <i class="material-icons">today</i>
+                        <input type="text" class="input-fecha" name="hasta2" placeholder="Hasta">
+                    </div>
+                    <div class="col s12 m2 center">
                         <a href="#!" id="generaRpt" onclick="generandoDataRpt('."'".$val."'".')"><i class="small material-icons">play_circle_filled</i></a>
                     </div>';
             break;
@@ -68,7 +99,6 @@ class reportes_model extends CI_Model {
 
     public function generandoDataRpt($val) {
         $data = array();
-
         switch ($val) {
             case '1':
                 for ($i=0; $i <= 500 ; $i++) {
@@ -94,6 +124,10 @@ class reportes_model extends CI_Model {
                     $data['data'][$i]['VALOR'] = $i;
                     $data['data'][$i]['TIPO'] = "CATEGORIA";
                 }
+            break;
+            case '4':
+                for ($i=1; $i <= 150 ; $i++) $data[] = '000'.$i;
+                $data = array_diff($data, array('0001','0002'));
             break;
         }
         echo json_encode($data);

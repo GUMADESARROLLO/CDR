@@ -1,13 +1,20 @@
+<input type="hidden" name="usuario1" id="usuario1" value="<?php echo $info[0]['idUser']?>">
 <div class="container"><br><br>
 	<div class="row">
-		<div class="col s3">
-			<img class="img-responsive" src="<?php echo base_url();?>assets/images/user-default.png">
+		<div class="col s3 image-perfil">
+			<div class="img-perfil">
+				<img class="img-responsive" src="<?php echo $info[0]['url']?>">
+			</div>
+			<div class="btn-c-perfil">
+                <a id="cphp" href="#!" class="btn-floating waves-effect waves-light green"><i class="material-icons">add</i></a>
+			</div>			
 		</div>
 		<div class="col s7 info-cliente-container">
 			<div class="info-cliente-container">
-				<?php 
+				<?php					
 					if ($info) {
-						echo '<h4>Hola '.$info[0]['nombre'].'!</h4>';
+						$pn = explode(" ", $info[0]['nombre']);
+						echo '<h4>Hola '.$pn[0].'!</h4>';
 						echo 'Tu último acceso fue el '.date('d/m/Y', strtotime($ultimoAcceso[0]['fecha']));
 					}
 				?>				

@@ -36,6 +36,7 @@ class Login_controller extends CI_Controller {
 	                    'idUser' => $data['user'][0]['idUser'],
 	                    'userName' => $data['user'][0]['userName'],
 	                    'nombre' => $data['user'][0]['nombre'],
+	                    'url' => $data['user'][0]['url'],
 	                    'rol'=>$data['user'][0]['rol'],
 	                    'logged' => 1
 	                );
