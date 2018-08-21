@@ -4,7 +4,7 @@
 			<div class="card">
 				<div class="card-content">
 					<div class="img-log">
-						<center><h5 style="font-weight: bold;">SLTransaction</h5></center><br>
+						<center><h5 style="font-weight: bold;">Reporte de Llamadas</h5></center><br>
 						<!--<img class="img-responsive" src="<?php echo base_url();?>assets/img/cont.png">-->
 					</div>
 					<div class="form-login">
@@ -27,7 +27,7 @@
 				<center><h5><?php if(isset($mensaje)) echo $mensaje; ?></h5></center>
 				<center><span style="color: red;"><?=validation_errors();?></span></center>
 				<hr><br>
-				<center><a style="color: #0070ba" href="#">¿Olvido su contraseña?</a></center>
+
 			</div>
 		</div>
 	</div>	

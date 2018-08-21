@@ -11,7 +11,7 @@ $(document).ready(function() {
 function inicializaControlFecha() {    
     $('input[class="input-fecha"]').daterangepicker({
      "locale": {
-            "format": "MM/DD/YYYY",
+            "format": "DD-MM-YYYY",
             "separator": " - ",
             "applyLabel": "Apply",
             "cancelLabel": "Cancel",

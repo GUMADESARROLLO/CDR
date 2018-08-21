@@ -43,7 +43,7 @@ class Login_controller extends CI_Controller {
 	                $this->session->set_userdata($sessiondata);
 
 	                if($this->session->userdata){	                    
-	                    redirect('main');
+	                    redirect('reportes');
 	                }
 	            }   
              }else{
@@ -53,5 +53,12 @@ class Login_controller extends CI_Controller {
 				$this->load->view('footer/footer_login');
              }
          }
+    }
+
+    public function salir() {
+        $this->session->sess_destroy();
+        $sessiondata = array('logged' => 0);
+        $this->session->unset_userdata($sessiondata);
+        redirect(base_url().'index.php');
     }
 }

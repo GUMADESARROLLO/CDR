@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SLTransaction</title>
+    <title>Reporte de Llamadas</title>
     <!--Import Google Icon Font-->    
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
     <!--Import materialize.css-->    
@@ -22,20 +22,14 @@
 			<div class="menu-center">
 				<div class="nav-wrapper">
 					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-				<ul id="nav-mobile" class="center hide-on-med-and-down">
-					<?php if ($menu_usuario) { echo $menu_usuario; } ?>
-				</ul>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#">Cerrar sesión</a></li>
-				</ul>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#"><i class="material-icons">settings</i></a></li>
-				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<?php if ($menu_usuario) { echo $menu_usuario; } ?>
-					<li><a href="#"><i class="material-icons left">settings</i>Cerrar sesión</a></li>
-				</ul>
-				</div>		
+                    <ul id="nav-mobile" class="center hide-on-med-and-down">
+                        <li><a id="resumen" href="#">REPORTE DE LLAMADAS</a></li>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="salir">Cerrar sesión</a></li>
+                    </ul>
+
+                </div>
 			</div>
 		</nav>
 	</header>

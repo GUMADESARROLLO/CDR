@@ -12,10 +12,9 @@ class reportes_controller extends CI_Controller {
     }
 
     public function index() {
-        $data['menu_usuario']=$this->main_model->generarMenu($this->session->userdata('rol'));
-        
-        $this->load->view('header/header',$data);
-        $this->load->view('pages/reportes/reportes');
+        $this->load->view('header/header');
+        $data['ext'] = $this->reportes_model->getExt();
+        $this->load->view('pages/reportes/reportes',$data);
         $this->load->view('footer/footer');
         $this->load->view('jsView/js_reportes');
     }
@@ -24,8 +23,13 @@ class reportes_controller extends CI_Controller {
         $this->reportes_model->generandoOpciones($val);
     }
 
-    public function generarReporte($val) {
-        $this->reportes_model->generandoDataRpt($val);
+    public function generarReporte($d1,$d2,$ex) {
+
+        $this->reportes_model->generandoDataRpt($d1,$d2,$ex);
+    }
+
+    public function toExcel($d1,$d2,$ex) {
+        $this->reportes_model->generarExcel($d1,$d2,$ex);
     }
 }
 ?>
