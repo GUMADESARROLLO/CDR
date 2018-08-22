@@ -15,7 +15,7 @@
                                 <option value="0">Todas...</option>
                                 <?php
                                 foreach ($ext as $vl){
-                                    echo '<option value="'.$vl['extension'].'">'.$vl['name'].'</option>';
+                                    echo '<option value="'.$vl['extension'].'">'.$vl['name'].' [ '.$vl['extension'].' ] '.'</option>';
                                 }
 
                                 ?>
