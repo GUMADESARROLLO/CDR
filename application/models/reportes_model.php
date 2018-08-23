@@ -18,7 +18,8 @@ class reportes_model extends CI_Model {
         if($array_planta->num_rows() > 0 ) {
             foreach ($array_planta->result_array() as $key){
                 $data['data'][$i]['ORIGEN']   = $key['src'];
-                $data['data'][$i]['FECHA']    = $key['FECHA'];
+                $data['data'][$i]['FECHA']    = $key['ftDate'];
+                $data['data'][$i]['HORA']    = $key['ftTime'];
                 $data['data'][$i]['DESTINO']  = $key['dst'];
                 $data['data'][$i]['DURACION'] = $key['DURACION'];
 
@@ -85,10 +86,10 @@ class reportes_model extends CI_Model {
             $objPHPExcel = new PHPExcel();
 
             $tituloReporte = "Reporte de Llamadas";
-            $titulosColumnas = array('FECHA','ORIGEN','DESTINO','CANAL','CANAL DESTINO','ESTADO', 'DURACION');
+            $titulosColumnas = array('FECHA','HORA','ORIGEN','DESTINO','CANAL','CANAL DESTINO','ESTADO', 'DURACION');
 
             $objPHPExcel->setActiveSheetIndex(0)
-                ->mergeCells('A1:E1');
+                ->mergeCells('A1:H1');
 
 
             $objPHPExcel->setActiveSheetIndex(0)
@@ -99,17 +100,19 @@ class reportes_model extends CI_Model {
                 ->setCellValue('D3',  $titulosColumnas[3])
                 ->setCellValue('E3',  $titulosColumnas[4])
                 ->setCellValue('F3',  $titulosColumnas[5])
-                ->setCellValue('G3',  $titulosColumnas[6]);
+                ->setCellValue('G3',  $titulosColumnas[6])
+                ->setCellValue('H3',  $titulosColumnas[7]);
             $i=4;
             foreach ($resultado->result_array() as $key) {
                 $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue('A'.$i,  date('d/m/Y H:m:s', strtotime($key['FECHA'])))
-                    ->setCellValue('B'.$i,  $key['src'])
-                    ->setCellValue('C'.$i,  $key['dst'])
-                    ->setCellValue('D'.$i,  $key['channel'])
-                    ->setCellValue('E'.$i,  $key['dstchannel'])
-                    ->setCellValue('F'.$i,  $key['disposition'])
-                    ->setCellValue('G'.$i,  $key['DURACION']);
+                    ->setCellValue('A'.$i,  $key['ftDate'])
+                    ->setCellValue('B'.$i,  $key['ftTime'])
+                    ->setCellValue('C'.$i,  $key['src'])
+                    ->setCellValue('D'.$i,  $key['dst'])
+                    ->setCellValue('E'.$i,  $key['channel'])
+                    ->setCellValue('F'.$i,  $key['dstchannel'])
+                    ->setCellValue('G'.$i,  $key['disposition'])
+                    ->setCellValue('H'.$i,  $key['DURACION']);
                 $i++;
             }
 
@@ -159,8 +162,9 @@ class reportes_model extends CI_Model {
             $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(50);
             $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
             $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-            $objPHPExcel->getActiveSheet()->getStyle('A1:E1')->applyFromArray($estiloTituloReporte);
-            $objPHPExcel->getActiveSheet()->getStyle('A3:G3')->applyFromArray($estiloTituloColumnas);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->applyFromArray($estiloTituloReporte);
+            $objPHPExcel->getActiveSheet()->getStyle('A3:H3')->applyFromArray($estiloTituloColumnas);
             $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:E".($i-1));
 
             $objPHPExcel->getActiveSheet()->setTitle('Reporte Llamadas');

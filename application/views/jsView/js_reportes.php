@@ -44,6 +44,7 @@ function inicializarDatatable() {
             ],
             "columns": [
                 { "title": "FECHA" },
+                { "title": "HORA" },
                 { "title": "ORIGEN" },
                 { "title": "DESTINO" },
                 { "title": "CANAL" },
@@ -104,6 +105,7 @@ function generandoDataRpt() {
         },
         columns: [
             { "data": "FECHA" },
+            { "data": "HORA" },
             { "data": "ORIGEN" },
             { "data": "DESTINO" },
             { "data": "channel" },
