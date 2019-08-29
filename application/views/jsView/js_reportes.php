@@ -10,7 +10,8 @@ $('#Id_To_Excel').click(function(){
     var d1  = $('#Id_Desde').val();
     var d2  = $('#Id_Hasta').val();
     var ex = $('#Id_ext').val();
-    var url = "Reporte_Excel/" + d1 + "/" + d2 + "/" + ex;
+    var tm = $('#Id_Time').val();
+    var url = "Reporte_Excel/" + d1 + "/" + d2 + "/" + ex + "/" + tm;
 
     window.open(url, '_blank');
 });
@@ -73,10 +74,13 @@ function generandoDataRpt() {
     var d1 = $('#Id_Desde').val();
     var d2 = $('#Id_Hasta').val();
     var ex = $('#Id_ext').val();
+    var tm = $('#Id_Time').val();
+
+    console.log(tm);
 
     loadingPage(true);
     $('#tblReportes').DataTable({
-        ajax: 'reporteData/' + d1 + '/' + d2 + "/" + ex,
+        ajax: 'reporteData/' + d1 + '/' + d2 + "/" + ex + "/" + tm,
         "destroy": true,
         "ordering": true,
         "info": false,

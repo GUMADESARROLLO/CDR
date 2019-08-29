@@ -8,7 +8,21 @@ $(document).ready(function() {
 	}); 
 });
 
-function inicializaControlFecha() {    
+function inicializaControlFecha() {
+
+    $('input[class="input-time"]').daterangepicker({
+        timePicker : true,
+        singleDatePicker:true,
+        timePicker24Hour : true,
+        timePickerIncrement : 1,
+        timePickerSeconds : true,
+        locale : {
+            format : 'HH:mm:ss'
+        }
+    }).on('show.daterangepicker', function(ev, picker) {
+        picker.container.find(".calendar-table").hide();
+    });
+
     $('input[class="input-fecha"]').daterangepicker({
      "locale": {
             "format": "DD-MM-YYYY",

@@ -5,14 +5,16 @@ class reportes_model extends CI_Model {
         include(APPPATH.'libraries\PHPExcel\Classes\PHPExcel.php');
         $this->load->database();
     }
-    public function generandoDataRpt($D1,$D2,$ex) {
+    public function generandoDataRpt($D1,$D2,$ex,$tm) {
         $db_asterisk = $this->load->database('db_asterisk', TRUE);
-        $i=0;
-        $strg="";
-        $ext = $this->getGrup();
-        if ($ext!='') $strg = " AND src IN(". $ext.")";
+        $i = 0;
+        $strg = "";
+        $stTime = "";
+        //$ext = $this->getGrup();
+        //if ($ext!='') $strg = " AND src IN(". $ext.")";
         if ($ex!='0') $strg = " AND src IN('". $ex."')";
-        $array_planta=$db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg);
+        if ($tm!='00:00:00') $stTime = " AND DURACION <= '". $tm."'";
+        $array_planta=$db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime);
 
         $data = array();
         if($array_planta->num_rows() > 0 ) {
@@ -59,7 +61,8 @@ class reportes_model extends CI_Model {
     }
     public function getExt(){
         $db_asterisk = $this->load->database('db_asterisk', TRUE);
-        $resultado = $db_asterisk->query("SELECT T0.extension,T0.name FROM asterisk.users T0 WHERE T0.extension IN (".$this->getGrup().") ORDER BY T0.extension");
+        ///$resultado = $db_asterisk->query("SELECT T0.extension,T0.name FROM asterisk.users T0 WHERE T0.extension IN (".$this->getGrup().") ORDER BY T0.extension");
+         $resultado = $db_asterisk->query("SELECT T0.extension,T0.name FROM asterisk.users T0 ORDER BY T0.extension");
         if($resultado->num_rows() > 0 ) {
             return $resultado->result_array();
         }
@@ -67,19 +70,21 @@ class reportes_model extends CI_Model {
     }
 
 
-    public function generarExcel($f1,$f2,$ex) {
+    public function generarExcel($f1,$f2,$ex,$tm) {
 
         $db_asterisk = $this->load->database('db_asterisk', TRUE);
         $D1 = date('Y-m-d', strtotime($f1));
         $D2 = date('Y-m-d', strtotime($f2));
 
-        $strg="";
-        $ext = $this->getGrup();
-        if ($ext!='') $strg = "AND src IN(". $ext.")";
+        $strg = "";
+        $stTime = "";
+        //$ext = $this->getGrup();
+        //if ($ext!='') $strg = "AND src IN(". $ext.")";
         if ($ex!='0') $strg = " AND src IN('". $ex."')";
+        if ($tm!='00:00:00') $stTime = " AND DURACION <= '". $tm."'";
 
 
-        $resultado = $db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg);
+        $resultado = $db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime);
 
         if($resultado->num_rows() > 0 ) {
 
@@ -175,7 +180,7 @@ class reportes_model extends CI_Model {
             $objPHPExcel->getActiveSheet(0)->freezePaneByColumnAndRow(0,4);
 
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="Reporte visita de '.$D1.' Hasta '.$D2.'.xlsx"');
+            header('Content-Disposition: attachment;filename="Reporte de '.$D1.' Hasta '.$D2.'.xlsx"');
             header('Cache-Control: max-age=0');
 
             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

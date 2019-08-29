@@ -27,6 +27,6 @@ $route['talonarios'] = 'talonarios_controller';
 //RUTA: REPORTES
 $route['reportes'] = 'reportes_controller';
 $route['TipoRpt/(:any)'] =  'reportes_controller/generandoMenuTipoRpt/$1';
-$route['reporteData/(:any)/(:any)/(:any)'] =  'reportes_controller/generarReporte/$1/$2/$3';
+$route['reporteData/(:any)/(:any)/(:any)/(:any)'] =  'reportes_controller/generarReporte/$1/$2/$3/$4';
 
-$route['Reporte_Excel/(:any)/(:any)/(:any)'] =  'reportes_controller/toExcel/$1/$2/$3';
+$route['Reporte_Excel/(:any)/(:any)/(:any)/(:any)'] =  'reportes_controller/toExcel/$1/$2/$3/$4';

@@ -15,20 +15,24 @@
                                 <option value="0">Todas...</option>
                                 <?php
                                 foreach ($ext as $vl){
-                                    echo '<option value="'.$vl['extension'].'">'.$vl['name'].' [ '.$vl['extension'].' ] '.'</option>';
+                                    echo '<option value="'.$vl['extension'].'">'.' [ '.$vl['extension'].' ] - '.$vl['name'].'</option>';
                                 }
 
                                 ?>
                             </select>
 
                         </div>
-                        <div class="col s12 m4 container-input">
+                        <div class="col s12 m3 container-input">
                             <i class="material-icons">today</i>
                             <input type="text" id="Id_Desde" name="desde1" class="input-fecha" placeholder="Desde" value="">
                         </div>
-                        <div class="col s12 m5 container-input">
+                        <div class="col s12 m3 container-input">
                             <i class="material-icons">today</i>
                             <input type="text" id="Id_Hasta" name="hasta2" class="input-fecha" placeholder="Hasta">
+                        </div>
+                        <div class="col s12 m3 container-input">
+                            <i class="material-icons">alarm</i>
+                            <input type="text" id="Id_Time" name="Time" class="input-time" placeholder="00:00:00">
                         </div>
                         <div class="col s12 m1 left" >
                             <a href="#!" id="generaRpt" onclick="generandoDataRpt()" class=""><i class="small material-icons">play_circle_filled</i></a>

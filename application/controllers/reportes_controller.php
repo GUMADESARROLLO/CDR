@@ -23,13 +23,13 @@ class reportes_controller extends CI_Controller {
         $this->reportes_model->generandoOpciones($val);
     }
 
-    public function generarReporte($d1,$d2,$ex) {
+    public function generarReporte($d1,$d2,$ex,$tm) {
 
-        $this->reportes_model->generandoDataRpt($d1,$d2,$ex);
+        $this->reportes_model->generandoDataRpt($d1,$d2,$ex,$tm);
     }
 
-    public function toExcel($d1,$d2,$ex) {
-        $this->reportes_model->generarExcel($d1,$d2,$ex);
+    public function toExcel($d1,$d2,$ex,$tm) {
+        $this->reportes_model->generarExcel($d1,$d2,$ex,$tm);
     }
 }
 ?>
