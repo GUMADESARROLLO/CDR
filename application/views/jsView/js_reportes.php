@@ -16,6 +16,17 @@ $('#Id_To_Excel').click(function(){
     window.open(url, '_blank');
 });
 
+
+
+$('#Id_To_Avg').click(function(){
+    var d1  = $('#Id_Desde').val();
+    var d2  = $('#Id_Hasta').val();
+    var ex  = $('#Id_ext').val();
+    var url = "Reporte_AVG/" + d1 + "/" + d2 + "/" + ex ;
+
+    window.open(url, '_blank');
+});
+
 $('#Id_Buscar').on( 'keyup', function () {
     console.log(this.value);
     var table = $('#tblReportes').DataTable();

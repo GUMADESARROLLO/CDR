@@ -31,5 +31,8 @@ class reportes_controller extends CI_Controller {
     public function toExcel($d1,$d2,$ex,$tm) {
         $this->reportes_model->generarExcel($d1,$d2,$ex,$tm);
     }
+    public function toAvg($d1,$d2,$ex) {
+        $this->reportes_model->generarAvg($d1,$d2,$ex);
+    }
 }
 ?>

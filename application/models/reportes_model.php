@@ -190,4 +190,106 @@ class reportes_model extends CI_Model {
             print_r('No hay resultados para mostrar');
         }
     }
+
+    public function generarAvg($f1,$f2,$ex) {
+
+        $db_asterisk = $this->load->database('db_asterisk', TRUE);
+        $D1 = date('Y-m-d', strtotime($f1));
+        $D2 = date('Y-m-d', strtotime($f2));
+
+        $strg = "";
+        //$ext = $this->getGrup();
+        //if ($ext!='') $strg = "AND src IN(". $ext.")";
+        if ($ex!='0') $strg = " AND src IN('". $ex."') ";
+
+
+
+        $resultado = $db_asterisk->query("SELECT T0.src As Ext,SEC_TO_TIME(AVG(TIME_TO_SEC(T0.DURACION))) as clAVG FROM rpt_llamadas T0 WHERE T0.ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg . " GROUP BY T0.src");
+
+        if($resultado->num_rows() > 0 ) {
+
+            $objPHPExcel = new PHPExcel();
+
+            $tituloReporte = "Reporte de avg Por Extencion";
+            $titulosColumnas = array('Extencion','Promedio');
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->mergeCells('A1:H1');
+
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1',$tituloReporte)
+                ->setCellValue('A3',  $titulosColumnas[0])
+                ->setCellValue('B3',  $titulosColumnas[1]);
+            $i=4;
+            foreach ($resultado->result_array() as $key) {
+                $objPHPExcel->setActiveSheetIndex(0)
+                    ->setCellValue('A'.$i,  $key['Ext'])
+                    ->setCellValue('B'.$i,  $key['clAVG']);
+                $i++;
+            }
+
+            $estiloTituloReporte = array(
+                'font' => array(
+                    'name'      => 'Verdana',
+                    'bold'      => true,
+                    'italic'    => false,
+                    'strike'    => false,
+                    'size' =>18,
+                    'color'     => array(
+                        'rgb' => '212121'
+                    )
+                ),
+                'alignment' =>  array(
+                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                    'rotation'   => 0,
+                    'wrap'       => TRUE,
+                )
+            );
+
+            $estiloTituloColumnas = array(
+                'font' => array(
+                    'name'      => 'Arial',
+                    'bold'      => true
+                ),
+                'alignment' =>  array(
+                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                    'wrap'          => TRUE
+                ));
+
+            $estiloInformacion = new PHPExcel_Style();
+            $estiloInformacion->applyFromArray(
+                array(
+                    'font' => array(
+                        'name'      => 'Arial',
+                        'size' => 11
+                    )
+                ));
+            $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->applyFromArray($estiloTituloReporte);
+            $objPHPExcel->getActiveSheet()->getStyle('A3:H3')->applyFromArray($estiloTituloColumnas);
+            $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:E".($i-1));
+
+            $objPHPExcel->getActiveSheet()->setTitle('Reporte Llamadas');
+
+            $objPHPExcel->setActiveSheetIndex(0);
+
+            $objPHPExcel->getActiveSheet(0)->freezePane('A4');
+            $objPHPExcel->getActiveSheet(0)->freezePaneByColumnAndRow(0,4);
+
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="Reporte de '.$D1.' Hasta '.$D2.'.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+        }
+        else{
+            print_r('No hay resultados para mostrar');
+        }
+    }
 }

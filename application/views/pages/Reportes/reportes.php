@@ -45,7 +45,7 @@
 	<div class="divider"></div>
 	<br>
 	<div class="row" id="data-reporte">
-        <div class="col s12 m11">
+        <div class="col s10 m10">
             <div class="container-button">
                 <input type="text" class="form-control" placeholder="Buscar en Reporte" id="Id_Buscar">
                 <span class="input-group-btn">
@@ -54,9 +54,16 @@
             </div>
         </div>
         <div class="col s12 m1 left" >
-            <a href="#" id="Id_To_Excel" >
-            <img style="width: 45px; height: 45px;" src="<?PHP echo base_url('assets/images/excel.png');?>">
+            <a href="#" id="Id_To_Avg" >
+                <i class="small material-icons tooltipped" data-position="bottom" data-tooltip="Promedios">assessment</i>
             </a>
+        </div>
+        <div class="col s12 m1 left" >
+            <a href="#" id="Id_To_Excel" >
+            <!--<img style="width: 45px; height: 45px;" src="<?PHP echo base_url('assets/images/excel.png');?>">-->
+                <i class="small material-icons tooltipped" data-position="bottom" data-tooltip="Exportar">cloud_download</i>
+            </a>
+
         </div>
 		<div class="col s12 m12">
              <table id="tblReportes" class="display" cellspacing="0" width="100%"></table>
