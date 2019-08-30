@@ -343,3 +343,8 @@
   border-radius: 36px;
   background-color: #f44336;
 }
+
+.DrawBorder{
+    border: solid 2px black;
+}
+

@@ -14,20 +14,19 @@ class reportes_model extends CI_Model {
         //if ($ext!='') $strg = " AND src IN(". $ext.")";
         if ($ex!='0') $strg = " AND src IN('". $ex."')";
         if ($tm!='00:00:00') $stTime = " AND DURACION <= '". $tm."'";
-        $array_planta=$db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime);
+        $array_planta = $db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime);
 
         $data = array();
         if($array_planta->num_rows() > 0 ) {
             foreach ($array_planta->result_array() as $key){
-                $data['data'][$i]['ORIGEN']   = $key['src'];
-                $data['data'][$i]['FECHA']    = $key['ftDate'];
-                $data['data'][$i]['HORA']    = $key['ftTime'];
-                $data['data'][$i]['DESTINO']  = $key['dst'];
-                $data['data'][$i]['DURACION'] = $key['DURACION'];
-
-                $data['data'][$i]['channel'] = $key['channel'];
-                $data['data'][$i]['dstchannel'] = $key['dstchannel'];
-                $data['data'][$i]['disposition'] = $key['disposition'];
+                $data['data'][$i]['ORIGEN']         = $key['src'];
+                $data['data'][$i]['FECHA']          = $key['ftDate'];
+                $data['data'][$i]['HORA']           = $key['ftTime'];
+                $data['data'][$i]['DESTINO']        = $key['dst'];
+                $data['data'][$i]['DURACION']       = $key['DURACION'];
+                $data['data'][$i]['channel']        = $key['channel'];
+                $data['data'][$i]['dstchannel']     = ($key['dstchannel']=="") ? "N/D" : $key['dstchannel'];
+                $data['data'][$i]['disposition']    = $key['disposition'];
 
                 $i++;
             }
@@ -69,6 +68,11 @@ class reportes_model extends CI_Model {
         return 0;
     }
 
+    function microtime_float()
+    {
+        list($useg, $seg) = explode(" ", microtime());
+        return ((float)$useg + (float)$seg);
+    }
 
     public function generarExcel($f1,$f2,$ex,$tm) {
 
@@ -85,6 +89,8 @@ class reportes_model extends CI_Model {
 
 
         $resultado = $db_asterisk->query("SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime);
+        //echo "SELECT * FROM rpt_llamadas WHERE ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'".$strg.$stTime;
+        $tiempo_inicio = $this->microtime_float();
 
         if($resultado->num_rows() > 0 ) {
 
@@ -93,7 +99,7 @@ class reportes_model extends CI_Model {
             $tituloReporte = "Reporte de Llamadas";
             $titulosColumnas = array('FECHA','HORA','ORIGEN','DESTINO','CANAL','CANAL DESTINO','ESTADO', 'DURACION');
 
-            $objPHPExcel->setActiveSheetIndex(0)
+           $objPHPExcel->setActiveSheetIndex(0)
                 ->mergeCells('A1:H1');
 
 
@@ -115,7 +121,7 @@ class reportes_model extends CI_Model {
                     ->setCellValue('C'.$i,  $key['src'])
                     ->setCellValue('D'.$i,  $key['dst'])
                     ->setCellValue('E'.$i,  $key['channel'])
-                    ->setCellValue('F'.$i,  $key['dstchannel'])
+                    ->setCellValue('F'.$i,  ($key['dstchannel']=="") ? "N/D" : $key['dstchannel'])
                     ->setCellValue('G'.$i,  $key['disposition'])
                     ->setCellValue('H'.$i,  $key['DURACION']);
                 $i++;
@@ -179,16 +185,50 @@ class reportes_model extends CI_Model {
             $objPHPExcel->getActiveSheet(0)->freezePane('A4');
             $objPHPExcel->getActiveSheet(0)->freezePaneByColumnAndRow(0,4);
 
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="Reporte de '.$D1.' Hasta '.$D2.'.xlsx"');
-            header('Cache-Control: max-age=0');
+             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+             header('Content-Disposition: attachment;filename="Reporte de '.$D1.' Hasta '.$D2.'.xlsx"');
+             header('Cache-Control: max-age=0');
 
-            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-            $objWriter->save('php://output');
+             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+             $objWriter->save('php://output');
+
+            $tiempo_fin = $this->microtime_float();
+
+
+            echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio);
         }
         else{
             print_r('No hay resultados para mostrar');
         }
+    }
+    public function toChart(){
+
+        $i=0;
+        $json = array();
+        $db_asterisk = $this->load->database('db_asterisk', TRUE);
+
+        $D1 = date('Y-m-01');
+        $D2 = date('Y-m-d');
+
+        $resultado = $db_asterisk->query("SELECT T0.src As Ext,SEC_TO_TIME(AVG(TIME_TO_SEC(T0.DURACION))) as ExtAVG FROM rpt_llamadas T0 WHERE T0.ftDate BETWEEN '".date('Y-m-d',strtotime($D1))."' AND '".date('Y-m-d',strtotime($D2))."'". " GROUP BY T0.src ORDER BY ExtAVG desc limit  20");
+        foreach ($resultado->result_array() as $fila){
+            $json["name"][$i] =   $fila["Ext"];
+            $json["data"][$i] =   (float) $this->time_to_decimal($fila["ExtAVG"]);
+            $i++;
+        }
+
+        echo json_encode($json);
+
+
+
+
+    }
+
+    function time_to_decimal($time) {
+        $timeArr = explode(':', $time);
+        $decTime = ($timeArr[0]*60) + ($timeArr[1]) + ($timeArr[2]/60);
+
+        return number_format($decTime,2);
     }
 
     public function generarAvg($f1,$f2,$ex) {

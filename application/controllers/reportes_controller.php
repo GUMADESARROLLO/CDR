@@ -34,5 +34,8 @@ class reportes_controller extends CI_Controller {
     public function toAvg($d1,$d2,$ex) {
         $this->reportes_model->generarAvg($d1,$d2,$ex);
     }
+    public function toChart() {
+        $this->reportes_model->toChart();
+    }
 }
 ?>

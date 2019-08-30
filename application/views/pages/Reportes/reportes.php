@@ -1,4 +1,5 @@
 <div class="container"><br><br>
+
 	<div class="row">
         <div class="col s12 m12">
             <div class="card">
@@ -7,7 +8,7 @@
                         <div class="col s12 m12">
                             <p class="title-modals">Rangos</p>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="divider"></div>
                     <div class="row" id="menu-reporte"><br>
                         <div class="col s12 m2 container-input">
@@ -42,7 +43,7 @@
             </div>
         </div>
 	</div>
-	<div class="divider"></div>
+
 	<br>
 	<div class="row" id="data-reporte">
         <div class="col s10 m10">
@@ -69,5 +70,14 @@
              <table id="tblReportes" class="display" cellspacing="0" width="100%"></table>
 		</div>
 	</div>
-    <div class="row" id="data-reporte-tmp"></div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div id="containerGrafica" style="width:100%; height:400px;"></div>
+    </div>
+    <div class="modal-footer">
+
+    </div>
 </div>

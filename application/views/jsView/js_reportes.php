@@ -1,5 +1,55 @@
 <script>
-$(document).ready(function() {
+    var Char = {
+        chart: {
+            type: 'column',
+            renderTo: 'containerGrafica',
+            options3d: {
+                enabled: true,
+                alpha: 0,
+                beta: 20
+            }
+        },
+        title: {
+            text: 'Promedio de llamada Mes actual'
+        },
+        xAxis: {
+            categories: []
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+
+
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            colorByPoint: true,
+            data: [],
+            name: 'Min. ',
+            showInLegend: false
+        }]
+    };
+
+    $.getJSON("StatHome", function(d) {
+        Char.xAxis.categories = d.name;
+        Char.series[0].data = d.data;
+
+        new Highcharts.Chart(Char);
+    });
+
+
+    $(document).ready(function() {
 	$('.modal').modal();
 	inicializarDatatable();
 	inicializaControlFecha();
@@ -15,6 +65,10 @@ $('#Id_To_Excel').click(function(){
 
     window.open(url, '_blank');
 });
+$('#ProMes').click(function(){
+    $('#modal1').modal('open');
+});
+
 
 
 

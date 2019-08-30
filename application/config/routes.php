@@ -31,3 +31,5 @@ $route['reporteData/(:any)/(:any)/(:any)/(:any)'] =  'reportes_controller/genera
 
 $route['Reporte_Excel/(:any)/(:any)/(:any)/(:any)'] =  'reportes_controller/toExcel/$1/$2/$3/$4';
 $route['Reporte_AVG/(:any)/(:any)/(:any)'] =  'reportes_controller/toAvg/$1/$2/$3';
+
+$route['StatHome'] =  'reportes_controller/toChart';
